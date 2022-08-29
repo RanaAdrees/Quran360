@@ -130,9 +130,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<String> displaySurahName(){
+    public List<String> displaySurahName(String name){
         SQLiteDatabase db=this.getReadableDatabase();
-        String query="SELECT SurahNameU FROM "+params.SURAH_TABLE;
+        String query="SELECT "+ name +" FROM "+params.SURAH_TABLE;
         Cursor cursor=db.rawQuery(query,null);
         List<String> surahNameList=new ArrayList<>();
         if(cursor.moveToFirst())
