@@ -8,13 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 public class CustomArrayAdapterSurah extends ArrayAdapter {
     Activity context;
-    String surahA[];
-    String surahE[];
+    List<String> surahA;
+    List<String> surahE;
 
 
-    public CustomArrayAdapterSurah(Activity context, String surahA[], String surahE[]) {
+    public CustomArrayAdapterSurah(Activity context, List<String> surahA, List<String> surahE) {
         super(context, 0, surahA);
         this.context=context;
         this.surahA=surahA;
@@ -31,8 +33,8 @@ public class CustomArrayAdapterSurah extends ArrayAdapter {
 
         TextView surahEng=singleEntityView.findViewById(R.id.surahE);
 
-        surahArabic.setText(surahA[position]);
-        surahEng.setText(surahE[position]);
+        surahArabic.setText(surahA.get(position));
+        surahEng.setText(surahE.get(position));
         return singleEntityView;
     }
 

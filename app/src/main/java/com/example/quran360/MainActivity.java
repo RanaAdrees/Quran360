@@ -38,11 +38,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         dbhelper.checkDB();
-        List<String> surahNameList=new ArrayList<>();
-        surahNameList=dbhelper.displaySurahName();
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(MainActivity.this, android.R.layout.simple_list_item_1,surahNameList);
 
-        surahList.setAdapter(adapter);
 
 
     }
