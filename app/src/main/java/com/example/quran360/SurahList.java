@@ -2,7 +2,11 @@ package com.example.quran360;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,15 +21,30 @@ public class SurahList extends AppCompatActivity {
         setContentView(R.layout.activity_surah_list);
 
         DBHelper dbhelper=new DBHelper(this);
-        List<String> SANList=new ArrayList<>();
+        ArrayList<String> SANList;
         SANList=dbhelper.displaySurahName("SurahNameU");
 
-        List<String> SENList=new ArrayList<>();
+        ArrayList<String> SENList;
         SENList=dbhelper.displaySurahName("SurahNameE");
+
         ListView surahList=findViewById(R.id.surahList);
 
+        Log.i("Length of SAN:",SANList.get(6));
+        Log.i("Length of SEN:",SENList.get(6));
         CustomArrayAdapterSurah customArrayAdapter=new CustomArrayAdapterSurah(this,SANList,SENList);
 
         surahList.setAdapter(customArrayAdapter);
+
+
+        surahList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Log.i("Clicked on list:",String.valueOf(i));
+                Intent intent=new Intent(SurahList.this,AyahList.class);
+                intent.putExtra("SurahNo", String.valueOf(i));
+                startActivity(intent);
+            }
+        });
     }
 }

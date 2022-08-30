@@ -130,21 +130,50 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public List<String> displaySurahName(String name){
+    public ArrayList<String> displaySurahName(String name){
+        SQLiteDatabase db=null;
+        String path = params.DB_PATH + params.DB_NAME;
+        Log.i("myPath",path);
+        db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+        ArrayList<String> surahNameList = new ArrayList<>();
+        if (db!=null) {
+            String query = "SELECT "+ name+ " FROM " + params.SURAH_TABLE;
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                    do {
+                        String surahName;
+                        if(cursor.getString(0) != null) {
+                            surahName = cursor.getString(0);
+                            Log.i("SurahName", surahName);
+                            surahNameList.add(surahName);
+                        }
+                    } while (cursor.moveToNext());
+            }
+        }
+        return surahNameList;
+    }
+
+
+    public ArrayList<String> displayAyah(final int nameNo,int surahNumber)
+    {
         SQLiteDatabase db=this.getReadableDatabase();
-        String query="SELECT "+ name +" FROM "+params.SURAH_TABLE;
+        String query="SELECT * FROM "+params.AYAH_TABLE+" where SuraID="+surahNumber;
         Cursor cursor=db.rawQuery(query,null);
-        List<String> surahNameList=new ArrayList<>();
+        ArrayList<String> ayahList=new ArrayList<>();
         if(cursor.moveToFirst())
         {
             do {
-                String surahName="";
+                String ayah="";
+                if(cursor.getString(nameNo) != null) {
 
-                surahName=cursor.getString(0);
-                surahNameList.add(surahName);
+                    ayah = cursor.getString(nameNo);
+                    Log.i("Ayah:",ayah);
+                    ayahList.add(ayah);
+                }
             } while (cursor.moveToNext());
         }
-        return surahNameList;
+        return ayahList;
     }
 
 }

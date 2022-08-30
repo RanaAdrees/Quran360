@@ -7,13 +7,14 @@
     tools:context=".CustomAyahView">
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="410dp"
+        android:layout_height="wrap_content"
+        android:background="#1C1717"
+        android:backgroundTint="#1C1919"
         android:orientation="vertical"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/ayahArabic"
@@ -21,15 +22,18 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/noorehuda"
             android:text="TextView"
-            android:textAlignment="textEnd"
-            android:textSize="32sp" />
+            android:textAlignment="textStart"
+            android:textColor="#4CAF50"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/ayahTrans"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/Jameel_Noori_Nastaleeq"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/jameel_noori_nastaleeq"
             android:text="TextView"
-            android:textSize="30sp" />
+            android:textColor="#FDFCFC"
+            android:textSize="24sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

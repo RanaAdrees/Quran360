@@ -7,15 +7,16 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomArrayAdapterAyah extends ArrayAdapter {
     Activity context;
-    List<String> ayahArabicArr;
-    List<String> ayahTransArr;
+    ArrayList<String> ayahArabicArr;
+    ArrayList<String> ayahTransArr;
 
 
-    public CustomArrayAdapterAyah(Activity context, List<String> ayahArabicArr, List<String> ayahTransArr) {
+    public CustomArrayAdapterAyah(Activity context, ArrayList<String> ayahArabicArr, ArrayList<String> ayahTransArr) {
         super(context, 0, ayahArabicArr);
         this.context=context;
         this.ayahArabicArr=ayahArabicArr;
