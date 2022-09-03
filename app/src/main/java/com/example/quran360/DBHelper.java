@@ -155,6 +155,32 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public ArrayList<String> displaySurahNameFilter(String Colname,String surahNameCon ){
+        SQLiteDatabase db=null;
+        String path = params.DB_PATH + params.DB_NAME;
+        Log.i("myPath",path);
+        db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
+        ArrayList<String> surahNameList = new ArrayList<>();
+        if (db!=null) {
+            String query = "SELECT "+ Colname+ " FROM " + params.SURAH_TABLE +" WHERE "+Colname
+                    +" =";
+            Cursor cursor = db.rawQuery(query, null);
+
+            if (cursor.moveToFirst()) {
+                do {
+                    String surahName;
+                    if(cursor.getString(0) != null) {
+                        surahName = cursor.getString(0);
+                        Log.i("SurahName", surahName);
+                        surahNameList.add(surahName);
+                    }
+                } while (cursor.moveToNext());
+            }
+        }
+        return surahNameList;
+    }
+
+
     public ArrayList<String> displayAyah(final int nameNo,int surahNumber)
     {
         SQLiteDatabase db=this.getReadableDatabase();

@@ -57,16 +57,17 @@ public class SurahList extends AppCompatActivity {
         searchField.addTextChangedListener(new TextWatcher(){
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                Log.i("Before Text change",searchField.getText().toString());
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        Log.i("Text change",search)
+                        Log.i("Text change",searchField.getText().toString());
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
+                Log.i("After Text change",searchField.getText().toString());
 
             }
         });
