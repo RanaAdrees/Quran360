@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class DBHelper extends SQLiteOpenHelper {
     private SQLiteDatabase db;
@@ -130,54 +131,71 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public ArrayList<String> displaySurahName(String name){
+    public ArrayList<GenericListItem> displaySurahName(){
         SQLiteDatabase db=null;
         String path = params.DB_PATH + params.DB_NAME;
         Log.i("myPath",path);
         db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
-        ArrayList<String> surahNameList = new ArrayList<>();
+
+        ArrayList<GenericListItem> genericListItems = new ArrayList<>();
         if (db!=null) {
-            String query = "SELECT "+ name+ " FROM " + params.SURAH_TABLE;
+            String query = "SELECT SurahNameE,SurahNameU FROM " + params.SURAH_TABLE;
             Cursor cursor = db.rawQuery(query, null);
 
             if (cursor.moveToFirst()) {
                     do {
-                        String surahName;
+                        GenericListItem item=new GenericListItem();
+
                         if(cursor.getString(0) != null) {
-                            surahName = cursor.getString(0);
-                            Log.i("SurahName", surahName);
-                            surahNameList.add(surahName);
+                            item.setFirstEntity(cursor.getString(0));
+                            item.setSecendEntity(cursor.getString(1));
+
+                            Log.i("SurahName", cursor.getString(0));
+
+
+                            genericListItems.add(item);
                         }
                     } while (cursor.moveToNext());
             }
         }
-        return surahNameList;
+        return genericListItems;
     }
 
 
-    public ArrayList<String> displaySurahNameFilter(String Colname,String surahNameCon ){
+    public ArrayList<GenericListItem> surahFilter(String surahNameCon ){
         SQLiteDatabase db=null;
         String path = params.DB_PATH + params.DB_NAME;
+        ArrayList<GenericListItem> genericListItems = new ArrayList<>();
         Log.i("myPath",path);
         db = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READONLY);
         ArrayList<String> surahNameList = new ArrayList<>();
         if (db!=null) {
-            String query = "SELECT "+ Colname+ " FROM " + params.SURAH_TABLE +" WHERE "+Colname
-                    +" =";
+            String query = "SELECT SurahNameE,SurahNameU FROM " + params.SURAH_TABLE;
             Cursor cursor = db.rawQuery(query, null);
 
             if (cursor.moveToFirst()) {
                 do {
-                    String surahName;
+                    GenericListItem item=new GenericListItem();
+                    String name1,name2;
+
                     if(cursor.getString(0) != null) {
-                        surahName = cursor.getString(0);
-                        Log.i("SurahName", surahName);
-                        surahNameList.add(surahName);
+                        name1=surahNameCon.toLowerCase(Locale.ROOT);
+                        name2=cursor.getString(0).toLowerCase(Locale.ROOT);
+                        if(name2.contains(name1))
+                        {
+                            item.setFirstEntity(cursor.getString(0));
+                            item.setSecendEntity(cursor.getString(1));
+
+                            Log.i("SurahName", cursor.getString(0));
+
+                            genericListItems.add(item);
+                        }
+
                     }
                 } while (cursor.moveToNext());
             }
         }
-        return surahNameList;
+        return genericListItems;
     }
 
 

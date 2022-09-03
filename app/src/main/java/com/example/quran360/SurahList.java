@@ -28,17 +28,18 @@ public class SurahList extends AppCompatActivity {
 
         searchField=findViewById(R.id.searchField);
         DBHelper dbhelper=new DBHelper(this);
-        ArrayList<String> SANList;
-        SANList=dbhelper.displaySurahName("SurahNameU");
+//        ArrayList<String> SANList;
+//        SANList=dbhelper.displaySurahName("SurahNameU");
+//
+//        ArrayList<String> SENList;
+//        SENList=dbhelper.displaySurahName("SurahNameE");
 
-        ArrayList<String> SENList;
-        SENList=dbhelper.displaySurahName("SurahNameE");
-
+       ArrayList<GenericListItem> SurahList=dbhelper.displaySurahName();
         ListView surahList=findViewById(R.id.surahList);
 
-        Log.i("Length of SAN:",SANList.get(6));
-        Log.i("Length of SEN:",SENList.get(6));
-        CustomArrayAdapterSurah customArrayAdapter=new CustomArrayAdapterSurah(this,SANList,SENList);
+//        Log.i("Length of SAN:",SANList.get(6));
+//        Log.i("Length of SEN:",SENList.get(6));
+        CustomArrayAdapterSurah customArrayAdapter=new CustomArrayAdapterSurah(this,SurahList);
 
         surahList.setAdapter(customArrayAdapter);
 
@@ -63,6 +64,12 @@ public class SurahList extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                         Log.i("Text change",searchField.getText().toString());
+                ArrayList<GenericListItem> SurahList2;
+                SurahList2=dbhelper.surahFilter(searchField.getText().toString());
+                CustomArrayAdapterSurah customArrayAdapter2;
+                customArrayAdapter2=new CustomArrayAdapterSurah(SurahList.this,SurahList2);
+                surahList.setAdapter(customArrayAdapter2);
+
             }
 
             @Override

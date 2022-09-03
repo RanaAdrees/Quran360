@@ -14,16 +14,16 @@ import java.util.List;
 
 public class CustomArrayAdapterSurah extends ArrayAdapter {
     Activity context;
-    ArrayList<String> surahA;
-    ArrayList<String> surahE;
+    ArrayList<GenericListItem> genericListItems;
 
 
-    public CustomArrayAdapterSurah(Activity context, ArrayList<String> surahA, ArrayList<String> surahE) {
 
-        super(context, 0, surahA);
+    public CustomArrayAdapterSurah(Activity context, ArrayList<GenericListItem> genericListItems) {
+
+        super(context, 0, genericListItems);
         this.context=context;
-        this.surahA=surahA;
-        this.surahE=surahE;
+        this.genericListItems=genericListItems;
+
 
     }
     @Override
@@ -36,10 +36,10 @@ public class CustomArrayAdapterSurah extends ArrayAdapter {
 
         TextView surahEng=singleEntityView.findViewById(R.id.surahE);
 
-        Log.i("Position value A:",surahA.get(position));
-        Log.i("Position value E:",surahE.get(position));
-        surahArabic.setText(surahA.get(position));
-        surahEng.setText(surahE.get(position));
+//        Log.i("Position value A:",surahA.get(position));
+//        Log.i("Position value E:",surahE.get(position));
+        surahArabic.setText(genericListItems.get(position).getSecendEntity());
+        surahEng.setText(genericListItems.get(position).getFirstEntity());
         return singleEntityView;
     }
 
