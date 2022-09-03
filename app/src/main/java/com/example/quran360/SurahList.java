@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,16 +45,7 @@ public class SurahList extends AppCompatActivity {
         surahList.setAdapter(customArrayAdapter);
 
 
-        surahList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                Log.i("Clicked on list:",String.valueOf(i));
-                Intent intent=new Intent(SurahList.this,AyahList.class);
-                intent.putExtra("SurahNo", String.valueOf(i));
-                startActivity(intent);
-            }
-        });
 
         searchField.addTextChangedListener(new TextWatcher(){
             @Override
@@ -76,6 +68,23 @@ public class SurahList extends AppCompatActivity {
             public void afterTextChanged(Editable editable) {
                 Log.i("After Text change",searchField.getText().toString());
 
+            }
+        });
+
+        surahList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Log.i("Clicked on list:",String.valueOf(i));
+                Intent intent=new Intent(SurahList.this,AyahList.class);
+                TextView text=(TextView)view.findViewById(R.id.surahA);
+
+                String surahName = text.getText().toString();
+                //String selectedFromList = (String) (surahList.getItemAtPosition(i));
+                Log.i("Itemmm String::>:",surahName);
+
+                intent.putExtra("SurahName", surahName);
+                startActivity(intent);
             }
         });
     }

@@ -12,15 +12,15 @@ import java.util.List;
 
 public class CustomArrayAdapterAyah extends ArrayAdapter {
     Activity context;
-    ArrayList<String> ayahArabicArr;
-    ArrayList<String> ayahTransArr;
+//    ArrayList<String> ayahArabicArr;
+//    ArrayList<String> ayahTransArr;
+ArrayList<GenericListItem> genericListItems;
 
 
-    public CustomArrayAdapterAyah(Activity context, ArrayList<String> ayahArabicArr, ArrayList<String> ayahTransArr) {
-        super(context, 0, ayahArabicArr);
+    public CustomArrayAdapterAyah(Activity context, ArrayList<GenericListItem> genericListItems) {
+        super(context, 0, genericListItems);
         this.context=context;
-        this.ayahArabicArr=ayahArabicArr;
-        this.ayahTransArr=ayahTransArr;
+        this.genericListItems=genericListItems;
 
     }
     @Override
@@ -33,8 +33,8 @@ public class CustomArrayAdapterAyah extends ArrayAdapter {
 
         TextView ayahTrans=singleEntityView.findViewById(R.id.ayahTrans);
 
-        ayahArabic.setText(ayahArabicArr.get(position));
-        ayahTrans.setText(ayahTransArr.get(position));
+        ayahArabic.setText(genericListItems.get(position).getFirstEntity());
+        ayahTrans.setText(genericListItems.get(position).getSecendEntity());
         return singleEntityView;
     }
 

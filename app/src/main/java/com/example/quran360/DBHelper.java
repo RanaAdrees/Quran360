@@ -199,25 +199,71 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public ArrayList<String> displayAyah(final int nameNo,int surahNumber)
+    public ArrayList<GenericListItem> displayAyah(int surahNumber)
     {
         SQLiteDatabase db=this.getReadableDatabase();
         String query="SELECT * FROM "+params.AYAH_TABLE+" where SuraID="+surahNumber;
         Cursor cursor=db.rawQuery(query,null);
-        ArrayList<String> ayahList=new ArrayList<>();
+        String BismillahA="بِسۡمِ اللّٰہِ الرَّحۡمٰنِ الرَّحِیۡمِ";
+        String BismillahT="شروع اللہ کا نام لے کر جو بڑا مہربان نہایت رحم والا ہے۔";
+        //ArrayList<String> ayahList=new ArrayList<>();
+        //9
+        ArrayList<GenericListItem> genericListItems=new ArrayList<>();
         if(cursor.moveToFirst())
         {
             do {
                 String ayah="";
-                if(cursor.getString(nameNo) != null) {
+                GenericListItem item=new GenericListItem();
 
-                    ayah = cursor.getString(nameNo);
-                    Log.i("Ayah:",ayah);
-                    ayahList.add(ayah);
+                if(surahNumber==1 || surahNumber==9)
+                {
+                    if(cursor.getString(3) != null){
+
+                        item.setFirstEntity(cursor.getString(3));
+                        item.setSecendEntity(cursor.getString(4));
+                        Log.i("Ayah:",ayah);
+                        genericListItems.add(item);
+                    }
+
+                }
+                else{
+                    if(cursor.getString(3) != null){
+                        GenericListItem item2=new GenericListItem();
+                        item2.setFirstEntity(BismillahA);
+                        item2.setSecendEntity(BismillahT);
+                        genericListItems.add(item2);
+                        item.setFirstEntity(cursor.getString(3));
+                        item.setSecendEntity(cursor.getString(4));
+                        Log.i("Ayah:",ayah);
+                        genericListItems.add(item);
+                    }
+
+
                 }
             } while (cursor.moveToNext());
         }
-        return ayahList;
+        return genericListItems;
+    }
+
+
+    public int getSurahNumber(String surahName)
+    {
+        SQLiteDatabase db=this.getReadableDatabase();
+        String sf1=String.format("'%s'",surahName);
+        String query="SELECT SurahID,SurahNameU FROM "+params.SURAH_TABLE+" where SurahNameU="+sf1;
+        Cursor cursor=db.rawQuery(query,null);
+        int surahNum=0;
+        if(cursor.moveToFirst())
+        {
+            do {
+                if(cursor.getString(1) != null) {
+
+                    surahNum= cursor.getInt(0);
+
+                }
+            } while (cursor.moveToNext());
+        }
+        return surahNum;
     }
 
 }
