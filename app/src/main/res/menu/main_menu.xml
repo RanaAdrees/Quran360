@@ -11,7 +11,7 @@
             android:id="@+id/surah_list"
             android:icon="@drawable/quran_icon1"
             android:title="Surah" />
-        
+
     </group>
 
 
