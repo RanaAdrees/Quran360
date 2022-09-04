@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Quran360"
         tools:targetApi="31">
         <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
             android:name=".AyahList"
             android:exported="false" />
         <activity

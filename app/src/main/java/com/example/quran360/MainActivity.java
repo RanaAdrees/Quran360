@@ -16,40 +16,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button SurahActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        SurahActivity=findViewById(R.id.SurahActivity);
 
-        DBHelper dbhelper=new DBHelper(this);
-
-        try {
-            dbhelper.createDB();
-        } catch (IOException ioe) {
-
-            throw new Error("Database not created....");
-        }
-
-        try {
-            dbhelper.openDB();
-
-        }catch(SQLException sqle){
-
-            throw sqle;
-        }
-
-        dbhelper.checkDB();
-
-        SurahActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,SurahList.class);
-
-                startActivity(intent);
-            }
-        });
 
 
 
