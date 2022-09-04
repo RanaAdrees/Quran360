@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Quran360</string>
+    <string name="open">Openning</string>
+    <string name="close">Closing</string>
 </resources>
