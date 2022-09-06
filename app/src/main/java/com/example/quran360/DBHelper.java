@@ -215,23 +215,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 String ayah="";
                 GenericListItem item=new GenericListItem();
 
-                if(surahNumber==1 || surahNumber==9)
-                {
-                    if(cursor.getString(3) != null){
-
-                        item.setFirstEntity(cursor.getString(3));
-                        item.setSecendEntity(cursor.getString(4));
-                        Log.i("Ayah:",ayah);
-                        genericListItems.add(item);
-                    }
-
+                if(surahNumber==1 || surahNumber==9) {
+                    GenericListItem item2=new GenericListItem();
+                    item2.setFirstEntity(BismillahA);
+                    item2.setSecendEntity(BismillahT);
+                    genericListItems.add(item2);
                 }
                 else{
                     if(cursor.getString(3) != null){
-                        GenericListItem item2=new GenericListItem();
-                        item2.setFirstEntity(BismillahA);
-                        item2.setSecendEntity(BismillahT);
-                        genericListItems.add(item2);
+
                         item.setFirstEntity(cursor.getString(3));
                         item.setSecendEntity(cursor.getString(4));
                         Log.i("Ayah:",ayah);
